@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/signup', async (req, res) => {
     const {username, password} = req.body;
     const existingUser = await User.findOne({ username });
-    if (existUser) return res.status(400).json({ message: 'A user with this name already exists.' });
+    if (existingUser) return res.status(400).json({ message: 'A user with this name already exists.' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, password: hashedPassword });
